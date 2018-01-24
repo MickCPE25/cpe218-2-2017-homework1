@@ -162,47 +162,38 @@ public static class tree {
 		} else 
                     return false;
 	}
-    
-    public static void  inFix(Node n) {
-		if (isOperator(n.key)){
-			n.right = new Node(newStack.pop());
-			inFix(n.right);
-			n.left = new Node(newStack.pop());
-			inFix(n.left);
-		}
+     
+     private int isNumber(char Num)
+    {
+        return Num - '0';
     }
     
-    public static int calCulate(Node n){
-		if(n.key == '+')
-		{
-			return calCulate(n.left)+calCulate(n.right);
-		}
-		else  if(n.key == '-')
-		{
-			return calCulate(n.left)-calCulate(n.right);
-		}
-		else  if(n.key == '*')
-		{
-			return calCulate(n.left)*calCulate(n.right);
-		}
-		else  if(n.key == '/')
-		{
-			return  calCulate(n.right)/calCulate(n.left);
-		}
-		else return Integer.parseInt(n.key.toString());
-	}
+    public static void  inFix(Node n) {
+        System.out.println(n);
+    }
+    
+    public int calCulate (Node n){
+    
+        if((isOperator(n.key))){
+            switch (n.key){
+            case '+': Sum = calCulate(n.left) + calCulate(n.right) ; break;
+            case '-': Sum = calCulate(n.left) - calCulate(n.right) ; break;
+            case '*': Sum = calCulate(n.left)  * calCulate(n.right) ; break;
+            case '/': Sum = calCulate(n.left)  / calCulate(n.right) ; break;
+        }
+    }else{
+            return isNumber(n.key);
+        }  
+        return Sum;
+    }
 
 public static void inOrder(Node n) {
-		if(n.key == '+' || n.key == '-' || n.key == '*' || n.key == '/'){
-			if(n != Tree)System.out.print("(");
-			inOrder(n.left);
-			System.out.print(n.key);
-			inOrder(n.right);
-			if(n != Tree)System.out.print(")");
-		}else
-		{
-			System.out.print(n.key);
-		}
+    if (n == null){
+            return ;
+        }
+        else
+            inOrder(n.left);
+            inOrder(n.right);
 	}
     
     
@@ -226,7 +217,7 @@ public static void inOrder(Node n) {
             }
         tRoot = node.pop();
     }
-
+}
     
 
 public String inOrder(DefaultMutableTreeNode node) { 
@@ -250,8 +241,7 @@ public int calCulate(DefaultMutableTreeNode node, Node n) {
 		}
         return 0;
 	
-}
-}
+    }
 }
 
 
